@@ -1,0 +1,254 @@
+============================================
+Symbols
+============================================
+
+java.util.BitSet
+clojure.core/foo
+foo.core
+foo
+*1
+*foo*
+FOO
+clojure.core/foo!
+->
+$
+->>
+--?
+a:a:a
+
+---
+
+(source_file
+ (symbol)
+ (symbol)
+ (symbol)
+ (symbol)
+ (symbol)
+ (symbol)
+ (symbol)
+ (symbol)
+ (symbol)
+ (symbol)
+ (symbol)
+ (symbol)
+ (symbol))
+
+============================================
+Strings
+============================================
+
+"Hello there"
+"Hello
+there"
+"Hello \n There"
+
+---
+
+(source_file
+ (string)
+ (string)
+ (string (escape_sequence)))
+
+============================================
+Characters
+============================================
+
+\newline
+\a
+\u9999
+\o377
+
+---
+
+(source_file
+ (character)
+ (character)
+ (character)
+ (character))
+
+============================================
+Booleans and nil
+============================================
+
+nil
+true
+false
+
+---
+
+(source_file
+ (nil)
+ (boolean)
+ (boolean))
+
+============================================
+Anonymous Symbols
+============================================
+
+%1
+%
+%&
+
+---
+
+(source_file
+ (symbol)
+ (symbol)
+ (symbol))
+
+============================================
+Keywords
+============================================
+
+:clojure.core/foo
+:foo.core
+:foo
+:*1
+:*foo*
+:FOO
+:clojure.core/foo!
+::clojure.core/foo
+::foo
+
+---
+
+(source_file
+ (keyword)
+ (keyword)
+ (keyword)
+ (keyword)
+ (keyword)
+ (keyword)
+ (keyword)
+ (keyword)
+ (keyword))
+
+============================================
+Numbers
+============================================
+
+0.02e100
+0.02E100
+1
+001
+0.01
+0xa
+0xaa
+1/2
+0001/2
+-1
++1
++100/1
+12E+99
+12.0E+99
++12.0E+99
++12E+99
+0.
+00000010
+0/1
+
+---
+
+(source_file
+ (number)
+ (number)
+ (number)
+ (number)
+ (number)
+ (number)
+ (number)
+ (number)
+ (number)
+ (number)
+ (number)
+ (number)
+ (number)
+ (number)
+ (number))
+
+============================================
+Lists
+============================================
+
+(a b c)
+()
+
+---
+
+(source_file
+ (list
+  (symbol)
+  (symbol)
+  (symbol))
+ (list))
+
+============================================
+Vectors
+============================================
+
+[1 2 3]
+[]
+
+---
+
+(source_file
+ (vector
+  (number)
+  (number)
+  (number))
+ (vector))
+
+============================================
+Maps
+============================================
+
+{}
+{:a 1 :b 2}
+{:a 1, :b 2}
+#:person{:a 1 :b 2}
+#::{:a 1 :b 2}
+#:person{}
+#::{}
+
+---
+
+(source_file
+ (map)
+ (map
+  (keyword)
+  (number)
+  (keyword)
+  (number))
+ (map
+  (keyword)
+  (number)
+  (keyword)
+  (number))
+ (map
+  (keyword)
+  (number)
+  (keyword)
+  (number))
+ (map
+  (keyword)
+  (number)
+  (keyword)
+  (number))
+ (map)
+ (map))
+
+============================================
+Sets
+============================================
+
+#{:a :b :c}
+#{}
+
+---
+
+(source_file
+ (set
+  (keyword)
+  (keyword)
+  (keyword))
+ (set))

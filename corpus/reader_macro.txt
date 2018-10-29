@@ -1,0 +1,225 @@
+============================================
+Anonymous Functions
+============================================
+
+#()
+#(%1 %2 % %&)
+
+---
+
+(source_file
+ (anonymous_function)
+ (anonymous_function
+  (symbol)
+  (symbol)
+  (symbol)
+  (symbol)))
+
+============================================
+Meta Data
+============================================
+
+^String a
+^:dynamic [1]
+^{:a 1} []
+#^String a
+#^:dynamic [1]
+#^{:a 1} []
+(def ^String a 1)
+
+---
+
+(source_file
+ (meta_data
+  (symbol)
+  (symbol))
+ (meta_data
+  (keyword)
+  (vector (number)))
+ (meta_data
+  (map (keyword) (number))
+  (vector))
+ (meta_data
+  (symbol)
+  (symbol))
+ (meta_data
+  (keyword)
+  (vector (number)))
+ (meta_data
+  (map (keyword) (number))
+  (vector))
+ (list
+  (symbol)
+  (meta_data (symbol) (symbol)) (number)))
+
+============================================
+Regex
+============================================
+
+#""
+#"[^1234]"
+
+---
+
+(source_file
+ (regex (string))
+ (regex (string)))
+
+============================================
+Discard
+============================================
+
+#_ () []
+#_ #_ () (1)
+
+---
+
+(source_file
+ (discard (list))
+ (vector)
+ (discard
+  (discard (list))
+  (list (number))))
+
+============================================
+Dispatch
+============================================
+
+#inst "2011-11-11"
+#uuid "97bda55b-6175-4c39-9e04-7c0205c709dc"
+
+---
+
+(source_file
+ (dispatch (symbol) (string))
+ (dispatch (symbol) (string)))
+
+============================================
+Deref
+============================================
+
+@a
+
+---
+
+(source_file
+ (deref (symbol)))
+
+============================================
+Macro Utils
+============================================
+
+#'a
+`a
+~a
+~@a
+a#
+
+---
+
+(source_file
+ (var_quote (symbol))
+ (backtick (symbol))
+ (unquote (symbol))
+ (unquote_splicing (symbol))
+ (gensym))
+
+============================================
+Macros
+============================================
+
+(def x 5)
+(def lst '(a b c))
+`(fred x ~x lst ~@lst 7 8 :nine)
+
+---
+
+(source_file
+ (list
+  (symbol)
+  (symbol)
+  (number))
+ (list
+  (symbol)
+  (symbol)
+  (quote (list (symbol) (symbol) (symbol))))
+ (backtick
+  (list
+   (symbol)
+   (symbol)
+   (unquote (symbol))
+   (symbol)
+   (unquote_splicing (symbol))
+   (number)
+   (number)
+   (keyword))))
+
+============================================
+Reader Conditonals
+============================================
+
+#?(:clj [])
+#?(:clj  (Clojure expression)
+   :cljs (ClojureScript expression)
+   :cljr (ClojureCLR expression)
+   :default (fallthrough expression))
+
+---
+
+(source_file
+ (reader_conditional (keyword) (vector))
+ (reader_conditional
+  (keyword) (list (symbol) (symbol))
+  (keyword) (list (symbol) (symbol))
+  (keyword) (list (symbol) (symbol))
+  (keyword) (list (symbol) (symbol))))
+
+============================================
+Reader Conditonals Splicing
+============================================
+
+{#?@(:clj (:a 1))}
+{#?@()}
+{#?@(:clj (:a 1) :cljs (:a 2))}
+[#?@(:clj [1 2])]
+
+---
+
+(source_file
+ (map (reader_conditional_splicing
+       (keyword) (list (keyword) (number))))
+ (map (reader_conditional_splicing))
+ (map (reader_conditional_splicing
+       (keyword) (list (keyword) (number))
+       (keyword) (list (keyword) (number))))
+ (vector (reader_conditional_splicing
+          (keyword) (vector (number) (number)))))
+
+============================================
+Comments
+============================================
+
+; This is a comment
+;; So is this
+(this is not)
+
+---
+
+(source_file
+ (comment)
+ (comment)
+ (list (symbol) (symbol) (symbol)))
+
+============================================
+Host Expressions
+============================================
+
+#+cljs (prn "cljs") ; This is depreciated
+
+---
+
+(source_file
+ (host_expression
+  (symbol)
+  (list (symbol) (string)))
+ (comment))
